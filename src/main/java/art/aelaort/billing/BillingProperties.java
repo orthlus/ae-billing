@@ -21,6 +21,7 @@ public class BillingProperties {
 	private String yandexUrl;
 	private YandexIAMS3 yandexIAMS3;
 	private YandexSecrets yandexSecrets;
+	private Sber sber;
 
 	@Getter
 	@Setter
@@ -38,5 +39,15 @@ public class BillingProperties {
 	public static class YandexSecrets {
 		private URI url;
 		private String secret;
+	}
+
+	@Getter
+	@Setter
+	public static class Sber {
+		private URI tokenUrl;
+		private String tokenClientId;
+		private String tokenClientSecret;
+		private URI billingUrl;
+		private String projectId;
 	}
 }
