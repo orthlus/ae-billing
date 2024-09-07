@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 	private final BillingService billingService;
 
-	@GetMapping("/billing/{serviceName}")
+	@GetMapping({"/billing/{serviceName}", "/billing"})
 	public String billing(@PathVariable(required = false) String serviceName) {
 		if (serviceName == null) {
 			return billingService.getAllString();
