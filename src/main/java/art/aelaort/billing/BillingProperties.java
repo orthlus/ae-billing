@@ -22,6 +22,7 @@ public class BillingProperties {
 	private YandexIAMS3 yandexIAMS3;
 	private YandexSecrets yandexSecrets;
 	private String sberStaticString;
+	private String pqStaticString;
 
 	@Getter
 	@Setter
