@@ -1,9 +1,8 @@
 package art.aelaort.billing.yandex;
 
-import art.aelaort.S3Params;
+import art.aelaort.YandexIAMConfig;
 import art.aelaort.YandexIAMSupplier;
 import art.aelaort.billing.BillingProperties;
-import art.aelaort.ya.func.helper.FuncParams;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -12,16 +11,17 @@ import org.springframework.web.client.RestTemplate;
 public class YandexConfig {
 	@Bean
 	public YandexIAMSupplier yaIAMSupplier(RestTemplate yandexRestTemplate,
-										   S3Params yandexS3Params,
 										   BillingProperties billingProperties) {
-		return new YandexIAMSupplier(
-				yandexRestTemplate,
-				yandexS3Params,
-				new FuncParams(
+		return new YandexIAMSupplier(yandexRestTemplate,
+				new YandexIAMConfig(
+						billingProperties.getYandexIAMS3().getId(),
+						billingProperties.getYandexIAMS3().getKey(),
+						billingProperties.getYandexIAMS3().getUrl(),
+						billingProperties.getYandexIAMS3().getRegion(),
+						billingProperties.getYandexIAMS3().getFile(),
+						billingProperties.getYandexIAMS3().getBucket(),
 						billingProperties.getYandexSecrets().getSecret(),
 						billingProperties.getYandexSecrets().getUrl()
-				),
-				billingProperties.getYandexIAMS3().getFile(),
-				billingProperties.getYandexIAMS3().getBucket());
+				));
 	}
 }
