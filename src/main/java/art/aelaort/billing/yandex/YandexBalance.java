@@ -1,6 +1,5 @@
 package art.aelaort.billing.yandex;
 
-import art.aelaort.YandexIAMSupplier;
 import art.aelaort.billing.BalanceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -14,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class YandexBalance implements BalanceResponse {
 	private final RestTemplate yandexRestTemplate;
-	private final YandexIAMSupplier yandexIAMSupplier;
+	private final RestTemplate iamRestTemplate;
 
 	@Override
 	public String balanceString() {
@@ -31,10 +30,14 @@ public class YandexBalance implements BalanceResponse {
 		ResponseEntity<BillingAccounts> response = yandexRestTemplate.exchange(
 				"/billing/v1/billingAccounts",
 				HttpMethod.GET,
-				entityBearerToken(yandexIAMSupplier.getToken()),
+				entityBearerToken(getToken()),
 				BillingAccounts.class);
 
 		return response.getBody();
+	}
+
+	private String getToken() {
+		return iamRestTemplate.getForObject("/token", String.class);
 	}
 
 	private HttpEntity<?> entityBearerToken(String token) {
