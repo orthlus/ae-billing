@@ -24,7 +24,7 @@ public class RestTemplateConfiguration {
 		return builder
 				.rootUri(properties.getTimewebUrl())
 				.defaultHeader(AUTHORIZATION, "Bearer " + properties.getTimewebToken().trim())
-				.setConnectTimeout(Duration.ofMinutes(2))
+				.connectTimeout(Duration.ofMinutes(2))
 				.build();
 	}
 
@@ -32,8 +32,8 @@ public class RestTemplateConfiguration {
 	public RestTemplate instagramRestTemplate(RestTemplateBuilder restTemplateBuilder) {
 		return restTemplateBuilder
 				.rootUri(properties.getInstagramUrl())
-				.setConnectTimeout(Duration.ofMinutes(5))
-				.setReadTimeout(Duration.ofMinutes(5))
+				.connectTimeout(Duration.ofMinutes(5))
+				.readTimeout(Duration.ofMinutes(5))
 				.defaultHeader("x-access-key", properties.getInstagramToken())
 				.build();
 	}
@@ -42,8 +42,8 @@ public class RestTemplateConfiguration {
 	public RestTemplate tiktokRestTemplate(RestTemplateBuilder restTemplateBuilder) {
 		return restTemplateBuilder
 				.rootUri(properties.getTiktokUrl())
-				.setConnectTimeout(Duration.ofMinutes(5))
-				.setReadTimeout(Duration.ofMinutes(5))
+				.connectTimeout(Duration.ofMinutes(5))
+				.readTimeout(Duration.ofMinutes(5))
 				.defaultHeader(AUTHORIZATION.toLowerCase(), "Bearer " + properties.getTiktokToken())
 				.build();
 	}
@@ -52,8 +52,8 @@ public class RestTemplateConfiguration {
 	public RestTemplate yandexRestTemplate(RestTemplateBuilder restTemplateBuilder) {
 		return restTemplateBuilder
 				.rootUri(properties.getYandexUrl())
-				.setConnectTimeout(Duration.ofMinutes(5))
-				.setReadTimeout(Duration.ofMinutes(5))
+				.connectTimeout(Duration.ofMinutes(5))
+				.readTimeout(Duration.ofMinutes(5))
 				.build();
 	}
 
