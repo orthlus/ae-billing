@@ -1,6 +1,8 @@
 package art.aelaort;
 
 import art.aelaort.billing.BillingService;
+import art.aelaort.telegram.Command;
+import art.aelaort.telegram.SimpleAdminBot;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,11 +13,11 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.Map;
 
-import static art.aelaort.TelegramClientHelpers.execute;
+import static art.aelaort.telegram.client.TelegramClientHelpers.execute;
 
 @Component
 @RequiredArgsConstructor
-public class BillingTelegram implements SpringAdminBot {
+public class BillingTelegram implements SimpleAdminBot {
 	private final BillingService billingService;
 
 	private enum Commands implements Command {
